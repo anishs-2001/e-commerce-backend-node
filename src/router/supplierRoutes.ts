@@ -6,7 +6,6 @@ import resetPassword from '../controllers/authentication/resetPassword';
 import verifyToken from '../middleware/verifyToken';
 import addProduct from '../controllers/products/addProducts';
 import editProduct from '../controllers/products/editProducts';
-import getProduct from '../controllers/products/getProducts';
 import getProductSupplier from '../controllers/products/getProductsSupplier';
 
 const router: Router = express.Router();
@@ -29,10 +28,6 @@ router.post("/addProduct", verifyToken, (req: Request, res: Response) => {
 
 router.patch("/editProduct", verifyToken, (req: Request, res: Response) => {
     editProduct(req, res);
-});
-
-router.get("/getProduct", verifyToken, (req: Request, res: Response) => {
-    getProduct(req, res);
 });
 
 router.get("/getProductSupplier", verifyToken, (req: Request, res: Response) => {

@@ -4,15 +4,23 @@ import login from './router/indexRoutes.ts';
 import customerRouter from './router/customerRoutes.ts';
 import firstExampleMW, { secondExampleMW } from './middleware/middlewareExample.ts';
 import sequelizeSync from './services/sequelize.ts';
-import { stopMongoDb } from './services/mongodb.ts';
+import { connectToMongoDb, stopMongoDb } from './services/mongodb.ts';
 import sequelize from './config/sequelize-config.ts';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
 
 sequelizeSync();
+connectToMongoDb();
 
+const corsOption = {
+    Accept: 'application/json, text/html',
+    origin: 'http://localhost/8080',
+    methods: 'GET, POST, PUT, PATCH',
+}
 
+app.use(cors(corsOption));
 //Add this line before app.use to encode white spaces in the queryparam
 app.use(express.urlencoded({ extended: true }));
 
@@ -37,8 +45,10 @@ app.listen(port, () => {
     console.log(`Listening to Port ${port}...`);
 });
 
+//instance of a node running on a machine(process)
 process.on("SIGINT", () => {
     sequelize.close(); stopMongoDb;
+    process.exit();
 });
 
 process.on("exit", () => {

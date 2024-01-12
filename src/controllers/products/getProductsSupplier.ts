@@ -1,4 +1,4 @@
-import { Db, ObjectId } from "mongodb";
+import { Db } from "mongodb";
 import { client } from "../../services/mongodb";
 import { Request, Response } from 'express';
 
@@ -11,8 +11,8 @@ const getProductSupplier = async (req: Request, res: Response): Promise<void> =>
             res.status(404).json({ error: 'Bad request' });
         }
         const productCollection = db.collection('products');
-        const result = await productCollection.find({ supplier_registration_id: registrationId }).toArray();
-        res.status(200).json({ ...result });
+        const data = await productCollection.find({ supplier_registration_id: registrationId }).toArray();
+        res.status(200).json({ ...data });
     }
     catch (error) {
         res.status(500).json({ message: 'Internal server error' });

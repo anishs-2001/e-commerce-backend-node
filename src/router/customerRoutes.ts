@@ -4,6 +4,11 @@ import custometrRegistration from '../controllers/customers/customerRegistration
 import resetPassword from '../controllers/authentication/resetPassword';
 import verifyToken from '../middleware/verifyToken';
 import customerProfile from '../controllers/customers/customerProfile';
+import getProduct from '../controllers/products/getProducts';
+import addCart from '../controllers/cart/addCart';
+import getCart from '../controllers/cart/getCart';
+import updateCart from '../controllers/cart/updateCart';
+import getUniqueProduct from '../controllers/products/getUniqueProducts';
 
 const router: Router = express.Router();
 
@@ -20,5 +25,26 @@ router.get("/customerProfile", verifyToken, async (req: Request, res: Response) 
 router.patch("/resetPassword", verifyToken, async (req: Request, res: Response) => {
     resetPassword(req, res);
 });
+
+router.get("/getProduct", verifyToken, (req: Request, res: Response) => {
+    getProduct(req, res);
+});
+
+router.get("/getUniqueProduct/:_id", verifyToken, (req: Request, res: Response) => {
+    getUniqueProduct(req, res);
+});
+
+router.post("/addCart", verifyToken, (req: Request, res: Response) => {
+    addCart(req, res);
+});
+
+router.get("/getCart", verifyToken, (req: Request, res: Response) => {
+    getCart(req, res);
+});
+
+router.put("/updateCart", verifyToken, (req: Request, res: Response) => {
+    updateCart(req, res);
+});
+
 
 export default router;

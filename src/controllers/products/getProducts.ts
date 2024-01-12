@@ -8,13 +8,12 @@ const getProduct = async (req: Request, res: Response): Promise<void> => {
     try {
         const { _id } = req.query;
         const { client_type } = req.body.jwt_decoded;
-        if (!_id || client_type != 'supplier') {
+        if (!_id) {
             res.status(404).json({ error: "Bad request" });
         }
         const productCollection = db.collection('products');
-        const filter = new ObjectId(_id as string)
-        const result = await productCollection.find({ _id: filter }).toArray();
-        res.status(200).json({ ...result });
+        const data = await productCollection.find({ _id: new ObjectId(_id as string) }).toArray();
+        res.status(200).json({ ...data });
     }
     catch (error) {
         res.status(500).json({ message: "Internal Server Error" });

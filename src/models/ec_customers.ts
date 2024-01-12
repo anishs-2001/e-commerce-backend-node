@@ -1,6 +1,5 @@
-import { DataTypes } from "sequelize";
+import Sequelize, { DataTypes } from "sequelize";
 import EcCustomers from "../../types/modelTypes/ec_customers";
-import Sequelize from "sequelize";
 import sequelize from "../config/sequelize-config";
 import bcrypt from 'bcrypt';
 
