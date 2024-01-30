@@ -9,7 +9,7 @@ const addProduct = async (req: Request, res: Response): Promise<void> => {
     const { registrationId } = req.body.jwt_decoded;
     try {
         if (!product_name || !product_category || !product_stock || !product_photo) {
-            res.status(404).json({ error: "Bad request" });
+            res.status(422).json({ error: "Bad request" });
         }
         const productCollection = db.collection('products');
         const productData = {

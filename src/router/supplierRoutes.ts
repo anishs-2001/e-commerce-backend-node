@@ -7,10 +7,13 @@ import verifyToken from '../middleware/verifyToken';
 import addProduct from '../controllers/products/addProducts';
 import editProduct from '../controllers/products/editProducts';
 import getProductSupplier from '../controllers/products/getProductsSupplier';
+import multer from 'multer';
 
 const router: Router = express.Router();
+const storage = multer.memoryStorage(); //using multer storage engine
+const upload = multer({ storage: storage })
 
-router.post("/supplierRegistration", async (req: Request, res: Response) => {
+router.post("/supplierRegistration", upload.single('profile_pic'), async (req: Request, res: Response) => {
     supplierRegistration(req, res);
 });
 

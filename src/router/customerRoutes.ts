@@ -9,6 +9,9 @@ import addCart from '../controllers/cart/addCart';
 import getCart from '../controllers/cart/getCart';
 import updateCart from '../controllers/cart/updateCart';
 import getUniqueProduct from '../controllers/products/getUniqueProducts';
+import cartCheckout from '../controllers/cart/cartCheckout';
+import cartcheckout1 from '../controllers/cart/cartcheckout1';
+import exportCSV from '../controllers/cart/exportCsv';
 
 const router: Router = express.Router();
 
@@ -44,6 +47,18 @@ router.get("/getCart", verifyToken, (req: Request, res: Response) => {
 
 router.put("/updateCart", verifyToken, (req: Request, res: Response) => {
     updateCart(req, res);
+});
+
+router.post("/cartCheckout", verifyToken, (req: Request, res: Response) => {
+    cartCheckout(req, res);
+});
+
+router.post("/cartCheckoutCopy", verifyToken, (req: Request, res: Response) => {
+    cartcheckout1(req, res);
+});
+
+router.get("/exportBill", verifyToken, (req: Request, res: Response) => {
+    exportCSV(req, res);
 });
 
 

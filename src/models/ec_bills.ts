@@ -1,8 +1,9 @@
-import Sequelize, { DataTypes } from "sequelize";
-import EcCart from "../../types/modelTypes/ec_cart";
-import sequelize from "../config/sequelize-config";
+import EcBills from "../../types/modelTypes/ec_bills";
+import { DataTypes, Sequelize } from "sequelize";
+import sequelize from "../../src/config/sequelize-config";
 
-EcCart.init({
+EcBills.init(
+{
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -10,17 +11,17 @@ EcCart.init({
         allowNull: false,
         unique: true,
     },
-    registration_id: {
+    invoice_number: {
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
     },
-    product_id: {
-        type: DataTypes.STRING,
+    total_amount: {
+        type: DataTypes.INTEGER, 
         allowNull: false,
     },
-    quantity: {
-        type: DataTypes.INTEGER,
+    products: {
+        type: DataTypes.JSON, 
         allowNull: false,
     },
     createdAt: {
@@ -34,10 +35,10 @@ EcCart.init({
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
     },
 },
-    {
-        sequelize,
-        modelName: 'ec_cart',
-        tableName: 'ec_cart',
-    });
+{
+    sequelize,
+    modelName: 'ec_bills',
+    tableName: 'ec_bills',
+});
 
-export default EcCart;
+export default EcBills;

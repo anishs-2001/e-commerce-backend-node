@@ -5,7 +5,7 @@ class EcSuppliers extends Model {
     public full_name!: string;
     public e_mail!: string;
     public password!: string;
-    public profile_pic!: Buffer | null;
+    public profile_pic!: string;
     public registration_id?: string;
     public registration_time_stamp?: Date;
     public createdAt?: Date;

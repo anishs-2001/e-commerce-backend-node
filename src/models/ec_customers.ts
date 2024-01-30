@@ -31,6 +31,7 @@ EcCustomers.init({
     registration_id: {
         type: DataTypes.STRING,
         allowNull: false,
+        unique: true,
         defaultValue: (): string => {
             return Math.floor(100000 + Math.random() * 900000).toString();
         },
